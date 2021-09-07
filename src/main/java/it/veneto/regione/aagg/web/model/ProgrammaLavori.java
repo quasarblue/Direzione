@@ -19,40 +19,62 @@
 package it.veneto.regione.aagg.web.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "funzionario_appalto")
+@Table(name = "programma_lavori")
 @Data
-public class FunzionarioAppalto implements Serializable {
-	  private static final long serialVersionUID = -1958336209165970790L;
-	  @Id
-	  @GeneratedValue(strategy=GenerationType.AUTO)
-	  public Integer id;
-      //public Integer dipendente_id;
-      //public Integer matricola;
+public class ProgrammaLavori implements Serializable {
+	private static final long serialVersionUID = 8284545525971265813L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	public Integer id;
+	
+	//@Column(name="cui")
+	//public String cui;
+	
+	@Column(name="anno")
+	public Integer anno;
+	
+	@Column(name="meseavvioprocedura")
+	public Integer meseavvioprocedura;
+
+
+	
+	@Column(name="acquistoverdi")
+	public Integer acquistoverdi;
+	
+	@Column(name="importototverdi")
+	public Integer importototverdi;
+	
+	@Column(name="importototale")
+	public Integer importototale;
+	
+	@Column(name="descrizione")
+	public String descrizione;
+	
+	@Column(name="note")
+	  public String note;
 	  
-      
-      @ManyToOne(cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
-      @JoinColumn(name = "dipendente_id", referencedColumnName = "id")
-      @JoinColumn(name = "matricola", referencedColumnName = "matricola")
-      public Dipendente dipendente;
-      
-      @OneToMany(mappedBy = "funzionarioAppalto")
-      public Set<Appalto> appalti;
-      
-      @OneToMany(mappedBy = "funzionarioAppalto")
-      public Set<ProgrammaLavori> programmaLavori;	  
+
+	@ManyToOne(cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
+    @JoinColumn(name = "funzionario_appalto_id", referencedColumnName = "id")
+    public FunzionarioAppalto funzionarioAppalto;
+	
+	@OneToOne(optional = true)
+	@JoinColumn(name = "cui", referencedColumnName = "codice_cui")
+	public Appalto appalto;
+	  
 }
