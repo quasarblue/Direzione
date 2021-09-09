@@ -18,6 +18,8 @@
  */
 package it.veneto.regione.aagg.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,10 @@ import org.springframework.web.servlet.ModelAndView;
 import it.veneto.regione.aagg.web.AppaltoRepository;
 import it.veneto.regione.aagg.web.DipendenteRepository;
 import it.veneto.regione.aagg.web.ProgrammaLavoriRepository;
+import it.veneto.regione.aagg.web.ProgrammaServiziRepository;
 import it.veneto.regione.aagg.web.model.Appalto;
 import it.veneto.regione.aagg.web.model.ProgrammaLavori;
+import it.veneto.regione.aagg.web.model.ProgrammaServizi;
 
 @Controller
 public class GreetingController {
@@ -45,6 +49,9 @@ public class GreetingController {
     
     @Autowired 
     private ProgrammaLavoriRepository programmaLavoriRepository;
+    
+    @Autowired 
+    private ProgrammaServiziRepository programmaServiziRepository;
     
     
 	@GetMapping("/greeting")
@@ -76,9 +83,27 @@ public class GreetingController {
 	@GetMapping(path="/programmazione-lavori")
 	public ModelAndView getAllLavori() {
 	    ModelAndView mav = new ModelAndView("programmazione-lavori");
-	    Iterable<ProgrammaLavori> programmaLavori = programmaLavoriRepository.findAll(Sort.by("anno").ascending().and(Sort.by("meseavvioprocedura").ascending()));
+	    Iterable<ProgrammaLavori> listaProgrammaLavori = programmaLavoriRepository.findAll(Sort.by("anno").ascending().and(Sort.by("meseavvioprocedura").ascending()));
 	    		//programmaLavoriRepository.findLavoriNative();
-		mav.addObject("programmaLavori", programmaLavori);
+	    for(ProgrammaLavori programmaLavori : listaProgrammaLavori) {
+	    	String cui = programmaLavori.cui;
+	    	List<Appalto> appalti = appaltoRepository.findByCodiceCui(cui);
+	    	programmaLavori.appalti=appalti;
+		}
+		mav.addObject("programmaLavori", listaProgrammaLavori);
+		return mav;
+	}
+
+	@GetMapping(path="/programmazione-servizi")
+	public ModelAndView getAllServizi() {
+	    ModelAndView mav = new ModelAndView("programmazione-servizi");
+	    Iterable<ProgrammaServizi> listaProgrammaServizi = programmaServiziRepository.findAll(Sort.by("anno").ascending().and(Sort.by("meseavvioprocedura").ascending()));
+	    for(ProgrammaServizi programmaServizi : listaProgrammaServizi) {
+	    	String cui = programmaServizi.cui;
+	    	List<Appalto> appalti = appaltoRepository.findByCodiceCui(cui);
+	    	programmaServizi.appalti=appalti;
+		}
+		mav.addObject("programmaServizi", listaProgrammaServizi);
 		return mav;
 	}
 	

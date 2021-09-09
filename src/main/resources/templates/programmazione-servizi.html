@@ -21,7 +21,7 @@
     xmlns:th="http://www.thymeleaf.org">
 
   <head>
-    <title>Programma Lavori</title> 
+    <title>Programma Servizi</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		
 	
@@ -42,6 +42,7 @@
         .table-condensed{
 		    font-size: 11px;
 		}
+		
 		.tableFixHead          { overflow: auto; height: 100px;}
         .tableFixHead thead th { position: sticky; top: 0; z-index: 1; background: #000 }
     </style>
@@ -55,26 +56,30 @@
 	    
   </head>
 <body>
-<H2>Programmazione Lavori DGR 243 9/3/21</H2>
+<H2 style="position:sticky; top:-10; z-index:1">Programmazione servizi e forniture DGR 876 30/6/21</H2>
   <table class="tableFixHead">
-  <thead>
-	<tr>
-		<th>Mese/Anno</th>
+    <thead>
+      <tr> 
+		<th class="">Mese/Anno</th>
 		<th class="text-center">codice CUI</th>
 		<th></th>
-		<th>Descrizione</th>
-		<th>Importo tot</th>
+		<th class="">Descrizione</th>
+		<th class="">Importo tot</th>
+		<th class="">Bilancio '21</th>
+		<th class="">Bilancio '22</th>
+		<th class="">Bilancio succ</th>
 		<th class="text-center">Verde</th>
-		<th>Importo tot verde</th>
-		<th>Aggregatore</th>
-		<th>Funzionario</th>
+		<!-- th class="">Importo tot verde</th-->
+		<th class="">Aggregatore</th>
+		<th class="">Funzionario</th>
 		<th class="text-center">Note</th>
-	</tr>
-</thead>
-<tbody>
-  <tr class="table-primary" th:each="lavoro : ${programmaLavori}" th:id="${lavoro.cui}">
-   <td th:text="${lavoro.meseavvioprocedura}+'/202'+${lavoro.anno}" class="text-center" style="width:5%"></td>
-   <td class="" th:if="${#lists.isEmpty(lavoro.appalti)}">
+      </tr>
+    </thead>
+    <tbody>
+    <tr class="table-primary" th:each="lavoro : ${programmaServizi}" th:id="${lavoro.cui}">
+      <td th:text="${lavoro.meseavvioprocedura}+'/202'+${lavoro.anno}" class="text-center" style="width:5%"></td>
+      <!-- div th:switch= "${lavoro.appalti}"-->
+      <td class="" th:if="${#lists.isEmpty(lavoro.appalti)}">
         <div th:text="${lavoro.cui}" style="width:15%"></div>
       </td>
       <td class="" th:if="${#lists.isEmpty(lavoro.appalti)}"></td>
@@ -88,26 +93,38 @@
           <span th:text="${appalto.stato.descrizione}" class="text-center" style="display: inline-block; width:5%"></span>
         </div>
       </td>
-   <td th:text="${lavoro.descrizione}" class="table-condensed"></td>
-   <td th:text="${#numbers.formatCurrency(lavoro.importototale)}" class="text-end" style="width:5%"></td>
-   <div class="" th:if="${lavoro.acquistoverdi==1}">
+      
+       
+     
+      <!-- /div-->
+	  <td th:text="${lavoro.descrizione}" class="table-condensed" ></td>
+	  <td th:text="${#numbers.formatCurrency(lavoro.importototale)}" class="text-end" style="width:5%"></td>
+	  <td th:text="${#numbers.formatCurrency(lavoro.risorsebilancio1)}" class="text-end" style="width:5%"></td>
+	  <td th:text="${#numbers.formatCurrency(lavoro.risorsebilancio2)}" class="text-end" style="width:5%"></td>
+	  <td th:text="${#numbers.formatCurrency(lavoro.risorsebilanciosucc)}" class="text-end" style="width:5%"></td>
+	  <div class="" th:if="${lavoro.acquistoverdi==1}">
    <td style="width:5%" class="text-center">Sì</td>
    </div>
    <div class="" th:if="${lavoro.acquistoverdi!=1}">
    <td style="width:5%" class="text-center">No</td>
    </div>
-   <td th:text="${#numbers.formatCurrency(lavoro.importototverdi)}" class="text-end" style="width:5%"></td>
-   <td th:text="${lavoro.nomeSoggettoDelegato}" style="width:5%" class="text-center"></td>
-   <td th:text="${lavoro.funzionarioAppalto.dipendente.cognome}+' '+${lavoro.funzionarioAppalto.dipendente.nome}" style="width:10%"></td>
-   <td class="popover-pop" data-toggle="popover" th:title="${lavoro.note}" data-content="" style="width:2%">
-     <div th:if= "${lavoro.note!=null}">
-     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
-       <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-     </svg>
-     </div>
-   </td>
-  </tr>
-  </tbody>
- </table>
+	  
+	  <!-- td th:text="${#numbers.formatCurrency(lavoro.importototverdi)}" class="text-end" style="width:5%"></td-->
+	  <td th:text="${lavoro.nomeSoggettoDelegato}" style="width:5%" class="text-center"></td>
+	  <td th:text="${lavoro.funzionarioAppalto.dipendente.cognome}+' '+${lavoro.funzionarioAppalto.dipendente.nome}" class="" style="width:10%"></td>
+	  
+      <td class="popover-pop" data-toggle="popover" th:title="${lavoro.note}" data-content="" style="width:2%">
+		    <div  th:if= "${lavoro.note!=null}">
+		     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+		       <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+		     </svg>
+		    </div>
+	  </td>
+    </tr> <!-- row -->
+    </tbody>
+  
+  </table> <!-- table -->
+  
+  
 </body>
 </html>

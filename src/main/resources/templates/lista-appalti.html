@@ -42,6 +42,8 @@
         .table-condensed{
 		    font-size: 11px;
 		}
+		.tableFixHead          { overflow: auto; height: 100px;}
+        .tableFixHead thead th { position: sticky; top: 0; z-index: 1; background: #000 }
     </style>
 	<script type="text/javascript">
     $(document).ready(function () {
@@ -53,7 +55,8 @@
 	    
   </head>
 <body>
-  <table>
+<H2>Dati CARDINIS</H2>
+  <table class="tableFixHead">
   <thead>
 	<tr>
 		<th>Data inizio</th>
@@ -75,7 +78,19 @@
    <td th:text="${#calendars.format(appalto.dataFine, 'dd/MMM/yyyy')}" style="width:5%"></td>
    <td th:text="${appalto.descrizione}" class="table-condensed" style="width:20%"></td>
    <td th:text="${appalto.stato.descrizione}" style="width:5%"></td>
-   <td th:text="${appalto.codice_cui}" style="width:5%"></td>   
+   <td  style="width:5%">
+   <div th:if= "${#strings.startsWith(appalto.codice_cui,'S') or #strings.startsWith(appalto.codice_cui,'F')}">
+   <a th:text="${appalto.codice_cui}"  th:href="@{/programmazione-servizi#}+${appalto.codice_cui}" ></a>
+   </div>
+   <div th:if= "${#strings.startsWith(appalto.codice_cui,'L')}">
+   <a th:text="${appalto.codice_cui}"  th:href="@{/programmazione-lavori#}+${appalto.codice_cui}" ></a>
+   </div>
+   <div th:if= "${not (#strings.startsWith(appalto.codice_cui,'S') or #strings.startsWith(appalto.codice_cui,'F') or #strings.startsWith(appalto.codice_cui,'L'))}">
+   <div th:text="${appalto.codice_cui}"  th:href="@{/programmazione-servizi#}+${appalto.codice_cui}" ></div>
+   </div>
+   </td>
+   
+      
    <td th:text="${appalto.codice_cig}" style="width:5%"></td>
    <td style="width:2%">
      <div th:if= "${appalto.drive!=null}">
