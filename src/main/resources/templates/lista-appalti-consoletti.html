@@ -91,7 +91,7 @@
    <td th:text="${#calendars.format(appalto.dataFine, 'dd/MMM/yyyy')}" style="width:5%"></td>
    <td th:text="${appalto.descrizione}" class="table-condensed" style="width:20%"></td>
    <td th:text="${appalto.stato.descrizione}" style="width:5%"></td>
-   <td th:text="${appalto.codice_cui}" style="width:5%"></td>
+   <td th:text="${appalto.codiceCui}" style="width:5%"></td>
    <td th:text="${appalto.codice_cig}" style="width:5%"></td>
    <td style="width:2%">
      <div th:if= "${appalto.drive!=null}">

@@ -45,6 +45,8 @@
 		
 		.tableFixHead          { overflow: auto; height: 100px;}
         .tableFixHead thead th { position: sticky; top: 0; z-index: 1; background: #000 }
+
+
     </style>
 	<script type="text/javascript">
     $(document).ready(function () {
@@ -56,7 +58,7 @@
 	    
   </head>
 <body>
-<H2 style="position:sticky; top:-10; z-index:1">Programmazione servizi e forniture DGR 876 30/6/21</H2>
+<H2 style="">Programmazione servizi e forniture DGR 876 30/6/21</H2>
   <table class="tableFixHead">
     <thead>
       <tr> 
@@ -85,7 +87,7 @@
       <td class="" th:if="${#lists.isEmpty(lavoro.appalti)}"></td>
       <td class="" th:if="${not #lists.isEmpty(lavoro.appalti)}" style="width:15%">
         <div class="d-inline-block" th:each="appalto : ${lavoro.appalti}">
-          <a th:text="${appalto.codice_cui}"  th:href="@{/appalti#}+${appalto.codice_cui}" ></a>     
+          <a class="anchor" th:text="${appalto.codiceCui}"  th:href="@{/appalti#}+${appalto.codiceCui}" ></a>     
         </div>
       </td>
       <td class="" th:if="${not #lists.isEmpty(lavoro.appalti)}">

@@ -80,7 +80,7 @@
       <td class="" th:if="${#lists.isEmpty(lavoro.appalti)}"></td>
       <td class="" th:if="${not #lists.isEmpty(lavoro.appalti)}" style="width:15%">
         <div class="d-inline-block" th:each="appalto : ${lavoro.appalti}">
-          <a th:text="${appalto.codice_cui}"  th:href="@{/appalti#}+${appalto.codice_cui}" ></a>     
+          <a th:text="${appalto.codiceCui}"  th:href="@{/appalti#}+${appalto.codiceCui}" ></a>     
         </div>
       </td>
       <td class="" th:if="${not #lists.isEmpty(lavoro.appalti)}">

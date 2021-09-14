@@ -24,6 +24,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import it.veneto.regione.aagg.web.model.Appalto;
 import it.veneto.regione.aagg.web.model.ProgrammaServizi;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -46,4 +47,5 @@ public interface ProgrammaServiziRepository extends PagingAndSortingRepository<P
 			     + "  ORDER BY a.anno asc NULLS FIRST, a.meseavvioprocedura asc", nativeQuery = true)
 	List<ProgrammaServizi> findServiziNative();
 
+	List<ProgrammaServizi> findByCui(String cui);
 }

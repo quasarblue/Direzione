@@ -43,5 +43,5 @@ public interface AppaltoRepository extends PagingAndSortingRepository<Appalto, I
 			     + "  ORDER BY a.data_fine asc NULLS FIRST, a.data_inizio asc", nativeQuery = true)
 	List<Appalto> findApertiMatricolaNative(int matricola);
 
-	List<Appalto> findByCodiceCui(String codice_cui);
+	List<Appalto> findByCodiceCui(String codiceCui);
 }

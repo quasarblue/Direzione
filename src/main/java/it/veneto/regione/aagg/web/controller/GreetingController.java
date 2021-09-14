@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import it.veneto.regione.aagg.web.AppaltoRepository;
 import it.veneto.regione.aagg.web.DipendenteRepository;
+import it.veneto.regione.aagg.web.K;
 import it.veneto.regione.aagg.web.ProgrammaLavoriRepository;
 import it.veneto.regione.aagg.web.ProgrammaServiziRepository;
 import it.veneto.regione.aagg.web.model.Appalto;
@@ -74,9 +75,21 @@ public class GreetingController {
 	public ModelAndView getAllAppalti() {
 	    // This returns a JSON or XML with the users
 	    ModelAndView mav = new ModelAndView("lista-appalti");
-	    Iterable<Appalto> appalti = appaltoRepository.findAll(Sort.by("dataFine").ascending().and(Sort.by("dataInizio").ascending()));
+	    Iterable<Appalto> listaAppalti = appaltoRepository.findAll(Sort.by("dataFine").ascending().and(Sort.by("dataInizio").ascending()));
 	    //Iterable<Appalto> appalti = appaltoRepository.findApertiMatricolaNative(906); 
-		mav.addObject("appalti", appalti);
+	    for(Appalto appalto: listaAppalti) {
+	    	String cui = appalto.codiceCui;
+	    	if(cui!=null) {
+	    		if(cui.startsWith(K.prefissoCuiServizi) || cui.startsWith(K.prefissoCuiForniture))  {
+	    	        List<ProgrammaServizi> programmaServizi = programmaServiziRepository.findByCui(cui);
+	    	        appalto.serviziDiProgrammazione=programmaServizi;
+	    		} else if(cui.startsWith(K.prefissoCuiLavori)) {
+	    			List<ProgrammaLavori> programmaLavori = programmaLavoriRepository.findByCui(cui);
+		    	    appalto.lavoriDiProgrammazione=programmaLavori;
+	    		}
+	       }
+		}
+		mav.addObject("appalti", listaAppalti);
 		return mav;
 	}
 	

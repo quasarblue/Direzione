@@ -20,9 +20,12 @@ package it.veneto.regione.aagg.web.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,8 +50,7 @@ public class Appalto implements Serializable {
 	  public Date dataFine;
 	  public String descrizione;
 	  //public String stato;
-	  public String codice_cui;
-	  @Column(name="codice_cui", insertable=false, updatable=false)
+	  @Column(name="codice_cui")
 	  public String codiceCui;
 	  public String codice_cui_collegato;
 	  public String codice_cig;
@@ -70,6 +72,11 @@ public class Appalto implements Serializable {
 	  @ManyToOne(cascade = CascadeType.ALL)
       @JoinColumn(name = "stato", referencedColumnName = "id")
       public StatoAppalto stato;
+	  	  
+	  @ElementCollection
+	  public List<ProgrammaServizi> serviziDiProgrammazione = new ArrayList<ProgrammaServizi>();
 	  
-	 
+	  @ElementCollection
+	  public List<ProgrammaLavori> lavoriDiProgrammazione = new ArrayList<ProgrammaLavori>();
+
 }

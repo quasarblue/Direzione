@@ -23,4 +23,8 @@ public class K {
 	public static final String chiuso = "chiuso";
 	public static final String pianificazioneIniziale = "pianificazione iniziale";
 	public static final String attivo = "attivo";
+	public static final String prefissoCuiServizi = "S";
+	public static final String prefissoCuiLavori = "L";
+	public static final String prefissoCuiForniture = "F";
+	
 }
