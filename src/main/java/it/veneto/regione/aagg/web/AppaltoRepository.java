@@ -42,6 +42,15 @@ public interface AppaltoRepository extends PagingAndSortingRepository<Appalto, I
 			     + "  AND d.matricola = ?1 "
 			     + "  ORDER BY a.data_fine asc NULLS FIRST, a.data_inizio asc", nativeQuery = true)
 	List<Appalto> findApertiMatricolaNative(int matricola);
-
+	
+	@Query(value = "SELECT * FROM appalto a, funzionario_appalto fa, dipendente d, stato_appalto s "
+		     + "  WHERE a.funzionario_appalto_id=fa.id "
+		     + "  AND fa.dipendente_id=d.id "
+		     + "  AND a.stato=s.id "
+		     //+ "  AND (s.descrizione='attivo' OR s.descrizione='pianificazione iniziale') "
+		     + "  AND d.matricola = ?1 "
+		     + "  ORDER BY a.data_fine asc NULLS FIRST, a.data_inizio asc", nativeQuery = true)
+	List<Appalto> findByMatricolaNative(int matricola);
+	
 	List<Appalto> findByCodiceCui(String codiceCui);
 }

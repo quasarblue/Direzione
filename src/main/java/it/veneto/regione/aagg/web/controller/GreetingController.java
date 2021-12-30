@@ -77,7 +77,13 @@ public class GreetingController {
 	    ModelAndView mav = new ModelAndView("lista-appalti");
 	    Iterable<Appalto> listaAppalti = appaltoRepository.findAll(Sort.by("dataFine").ascending().and(Sort.by("dataInizio").ascending()));
 	    //Iterable<Appalto> appalti = appaltoRepository.findApertiMatricolaNative(906); 
-	    for(Appalto appalto: listaAppalti) {
+	    addProgrammazione(listaAppalti);
+		mav.addObject("appalti", listaAppalti);
+		return mav;
+	}
+	
+	private void addProgrammazione(Iterable<Appalto> listaAppalti) {
+		for(Appalto appalto: listaAppalti) {
 	    	String cui = appalto.codiceCui;
 	    	if(cui!=null) {
 	    		if(cui.startsWith(K.prefissoCuiServizi) || cui.startsWith(K.prefissoCuiForniture))  {
@@ -89,8 +95,7 @@ public class GreetingController {
 	    		}
 	       }
 		}
-		mav.addObject("appalti", listaAppalti);
-		return mav;
+		return;
 	}
 	
 	@GetMapping(path="/programmazione-lavori")
@@ -134,8 +139,9 @@ public class GreetingController {
 	public ModelAndView getAllAppaltiGallina() {
 	    // This returns a JSON or XML with the users
 	    ModelAndView mav = new ModelAndView("lista-appalti-gallina");
-	    Iterable<Appalto> appalti = appaltoRepository.findApertiMatricolaNative(10225); 
-		mav.addObject("appalti", appalti);
+	    Iterable<Appalto> listaAppalti = appaltoRepository.findByMatricolaNative(10225); 
+	    addProgrammazione(listaAppalti);
+	    mav.addObject("appalti", listaAppalti);
 		return mav;
 	}
 	

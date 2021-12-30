@@ -66,7 +66,12 @@
 	  <div class="col-3">
 	  <a href="/appalti/consoletti"><button type="button" class="btn btn-outline-primary">Miranda Antonietta Consoletti</button></a>
 	  </div>
-  
+      <div class="col-2">
+	  <a href="/programmazione-lavori"><button type="button" class="btn btn-outline-primary">Programmazione Lavori DGR 243 9/3/21</button></a>
+	  </div>
+	  <div class="col-2">
+	  <a href="/programmazione-servizi"><button type="button" class="btn btn-outline-primary">Programmazione Servizi e forniture DLGR 1231 21/9/21</button></a>
+	  </div>
   </div>
 </div>
   <table>
@@ -90,7 +95,20 @@
    <td th:text="${#calendars.format(appalto.dataFine, 'dd/MMM/yyyy')}" style="width:5%"></td>
    <td th:text="${appalto.descrizione}" class="table-condensed" style="width:20%"></td>
    <td th:text="${appalto.stato.descrizione}" style="width:5%"></td>
-   <td th:text="${appalto.codiceCui}" style="width:5%"></td>
+   <!-- td th:text="${appalto.codiceCui}" style="width:5%"></td-->
+    <td>
+	  <div th:if= "${#strings.startsWith(appalto.codiceCui,'S') or #strings.startsWith(appalto.codiceCui,'F')}">
+	    <div class="" th:if="${not #lists.isEmpty(appalto.serviziDiProgrammazione)}" style="width:15%">
+          <div class="d-inline-block" th:each="programma: ${appalto.serviziDiProgrammazione}">
+	        <a class="anchor" th:text="${appalto.codiceCui}"  th:href="@{/programmazione-servizi#}+${appalto.codiceCui}" ></a>
+	      </div>
+	    </div>
+	    <div class="" th:if="${#lists.isEmpty(appalto.serviziDiProgrammazione)}" style="width:15%">
+	      <div th:text="${appalto.codiceCui}"></div>
+	    </div>
+	  </div>
+	  </td>
+   
    <td th:text="${appalto.codice_cig}" style="width:5%"></td>
    <td style="width:2%">
      <div th:if= "${appalto.drive!=null}">

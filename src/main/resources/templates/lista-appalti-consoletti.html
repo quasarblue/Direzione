@@ -37,9 +37,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     
     <style>
-        tr:nth-child(even) td{
+        /*tr:nth-child(even) td{
             background-color: rgba(255, 255, 255, .2);
-        }
+        }*/
         .table-condensed{
 		    font-size: 11px;
 		}
@@ -66,10 +66,16 @@
 	  <div class="col-3">
 	  <button type="button" class="btn btn-secondary">Miranda Antonietta Consoletti</button>
 	  </div>
+	  <div class="col-2">
+	  <a href="/programmazione-lavori"><button type="button" class="btn btn-outline-primary">Programmazione Lavori DGR 243 9/3/21</button></a>
+	  </div>
+	  <div class="col-2">
+	  <a href="/programmazione-servizi"><button type="button" class="btn btn-outline-primary">Programmazione Servizi e forniture DGR 876 30/6/21</button></a>
+	  </div>
   
   </div>
 </div>
-  <table>
+  <table class="table table-striped table-bordered border-primary table-active">
   <thead>
 	<tr>
 		<th>Data inizio</th>
@@ -86,7 +92,7 @@
 	</tr>
 </thead>
 <tbody>
-  <tr class="table-primary" th:each="appalto : ${appalti}">
+  <tr class="table table-striped " th:each="appalto : ${appalti}">
    <td th:text="${#calendars.format(appalto.dataInizio, 'dd/MMM/yyyy')}" style="width:5%"></td>
    <td th:text="${#calendars.format(appalto.dataFine, 'dd/MMM/yyyy')}" style="width:5%"></td>
    <td th:text="${appalto.descrizione}" class="table-condensed" style="width:20%"></td>
