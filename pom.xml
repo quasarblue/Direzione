@@ -27,10 +27,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.veneto.regione.aagg</groupId>
-	<artifactId>web</artifactId>
+	<artifactId>direzione</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>web</name>
-	<description>Demo project for Spring Boot</description>
+	<name>direzione</name>
+	<description>Applicativo a supporto della Direzione</description>
 	<properties>
 		<java.version>16</java.version>
 	</properties>

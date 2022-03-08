@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Direzione.  If not, see <https://www.gnu.org/licenses/>.
  */
-package it.veneto.regione.aagg.web;
+package it.veneto.regione.aagg.direzione;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import it.veneto.regione.aagg.web.model.Appalto;
+import it.veneto.regione.aagg.direzione.model.Appalto;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete

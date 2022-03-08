@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Direzione.  If not, see <https://www.gnu.org/licenses/>.
  */
-package it.veneto.regione.aagg.web.model;
+package it.veneto.regione.aagg.direzione.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,14 +31,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "programma_servizi")
+@Table(name = "programma_lavori")
 @Data
-public class ProgrammaServizi implements Serializable {
+public class ProgrammaLavori implements Serializable {
 	private static final long serialVersionUID = 8284545525971265813L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -63,19 +64,10 @@ public class ProgrammaServizi implements Serializable {
 	
 	@Column(name="importototale")
 	public Integer importototale;
-
-	@Column(name="risorsebilancio1")
-	public Integer risorsebilancio1;
-	
-	@Column(name="risorsebilancio2")
-	public Integer risorsebilancio2;
-	
-	@Column(name="risorsebilanciosucc")
-	public Integer risorsebilanciosucc;
 	
 	@Column(name="descrizione")
 	public String descrizione;
-	
+
 	@Column(name="nomesoggettodelegato")
 	public String nomeSoggettoDelegato;
 	
@@ -86,6 +78,10 @@ public class ProgrammaServizi implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
     @JoinColumn(name = "funzionario_appalto_id", referencedColumnName = "id")
     public FunzionarioAppalto funzionarioAppalto;
+	
+	/*@OneToOne(optional = true)
+	@JoinColumn(name = "cui", referencedColumnName = "codice_cui", nullable=true )
+	public Appalto appalto;*/
 	
 	@ElementCollection
 	public List<Appalto> appalti = new ArrayList<Appalto>();

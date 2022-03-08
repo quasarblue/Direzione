@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with Direzione.  If not, see <https://www.gnu.org/licenses/>.
  */
-package it.veneto.regione.aagg.web;
+package it.veneto.regione.aagg.direzione;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebApplication {
+public class DirezioneApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebApplication.class, args);
+		SpringApplication.run(DirezioneApplication.class, args);
 	}
 
 }

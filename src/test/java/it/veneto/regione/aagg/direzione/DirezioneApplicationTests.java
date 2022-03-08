@@ -1,10 +1,10 @@
-package it.veneto.regione.aagg.web;
+package it.veneto.regione.aagg.direzione;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebApplicationTests {
+class DirezioneApplicationTests {
 
 	@Test
 	void contextLoads() {

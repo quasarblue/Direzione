@@ -16,43 +16,31 @@
  * You should have received a copy of the GNU General Public License
  * along with Direzione.  If not, see <https://www.gnu.org/licenses/>.
  */
-package it.veneto.regione.aagg.web.model;
+package it.veneto.regione.aagg.direzione.model;
 
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "funzionario_appalto")
+@Table(name = "stato_appalto")
 @Data
-public class FunzionarioAppalto implements Serializable {
+public class StatoAppalto implements Serializable {
 	  private static final long serialVersionUID = -1958336209165970790L;
 	  @Id
 	  @GeneratedValue(strategy=GenerationType.AUTO)
 	  public Integer id;
-      //public Integer dipendente_id;
-      //public Integer matricola;
-	  
+      public String descrizione;
       
-      @ManyToOne(cascade = CascadeType.ALL)//, fetch = FetchType.LAZY)
-      @JoinColumn(name = "dipendente_id", referencedColumnName = "id")
-      @JoinColumn(name = "matricola", referencedColumnName = "matricola")
-      public Dipendente dipendente;
-      
-      @OneToMany(mappedBy = "funzionarioAppalto")
+      @OneToMany(mappedBy = "stato")
       public Set<Appalto> appalti;
-      
-      @OneToMany(mappedBy = "funzionarioAppalto")
-      public Set<ProgrammaLavori> programmaLavori;	  
+
 }

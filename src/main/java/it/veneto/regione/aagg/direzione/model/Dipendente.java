@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Direzione.  If not, see <https://www.gnu.org/licenses/>.
  */
-package it.veneto.regione.aagg.web.model;
+package it.veneto.regione.aagg.direzione.model;
 
 import java.io.Serializable;
 import java.util.Set;

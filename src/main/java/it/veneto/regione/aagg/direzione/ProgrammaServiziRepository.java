@@ -1,4 +1,4 @@
-package it.veneto.regione.aagg.web;
+package it.veneto.regione.aagg.direzione;
 /*
  * Copyright (C) 2021 Fabrizio Candon
 
@@ -24,8 +24,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import it.veneto.regione.aagg.web.model.Appalto;
-import it.veneto.regione.aagg.web.model.ProgrammaServizi;
+import it.veneto.regione.aagg.direzione.model.Appalto;
+import it.veneto.regione.aagg.direzione.model.ProgrammaServizi;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete

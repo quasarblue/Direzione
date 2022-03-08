@@ -16,20 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Direzione.  If not, see <https://www.gnu.org/licenses/>.
  */
-package it.veneto.regione.aagg.web;
+package it.veneto.regione.aagg.direzione;
 
-import java.util.List;
+public class K {
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-
-import it.veneto.regione.aagg.web.model.Dipendente;
-
-// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
-// CRUD refers Create, Read, Update, Delete
-
-public interface DipendenteRepository extends CrudRepository<Dipendente, Integer> {
+	public static final String chiuso = "chiuso";
+	public static final String pianificazioneIniziale = "pianificazione iniziale";
+	public static final String attivo = "attivo";
+	public static final String prefissoCuiServizi = "S";
+	public static final String prefissoCuiLavori = "L";
+	public static final String prefissoCuiForniture = "F";
 	
-	@Query(value = "SELECT e from Dipendente e order by e.matricola asc")
-    List<Dipendente> findDipendentiMatricolaAsc(); 
 }
